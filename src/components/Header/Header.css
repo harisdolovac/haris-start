@@ -1,0 +1,13 @@
+.header {
+  background-color: aquamarine;
+  height: 60px;
+  z-index: 1;
+}
+.logo {
+  height: 60px;
+  padding-left: 1%;
+}
+.text {
+  z-index: 100;
+  padding: 150px;
+}
