@@ -13,45 +13,49 @@ import {
   NavItem,
   NavLink,
   TabContent,
-  TabPane,
-  Card,
-  CardText,
-  CardTitle
+  TabPane
 } from "reactstrap";
 import classnames from "classnames";
 
 import ContactData from "../SchoolChange/ContactData";
+import ContractDocuments from "../SchoolChange/ContractDocuments";
+import Grupe from "../SchoolChange/Grupe";
+import CareModel from "../SchoolChange/CareModel/CareModel";
 
 class School extends Component {
   state = {
-    activeTab: "1",
+    activeTab: "4",
 
     name: "",
     school_number: "",
-
+    website: "",
     phone_number1: "",
     phone_number2: "",
     email: "",
     fax_number: "",
     mobile_number: "",
-    emergency_number: "",
     address: "",
     city: "",
     postal_code: null,
+    emergency_number: "",
+    poison_emergency_number: "",
+    school_type: "",
+    identification_number: "",
+    max_children: "",
     grants: [],
     groups: [],
-    services: []
+    services: [],
+    extra: []
   };
 
-  handleChange = (e, value) => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
-  onContactChange = (e, value) => {
+  onDataChange = (name, value) => {
     this.setState({
-      city: value,
-      address: value
+      [name]: value
     });
   };
 
@@ -69,22 +73,41 @@ class School extends Component {
     });
   };
 
+  handleNameChange = (name, newValues) => {
+    this.setState({
+      [name]: newValues
+    });
+    //console.log(newValues);
+  };
+
+  handleTimeChange = (name, newValues) => {
+    this.setState({
+      [name]: newValues
+    });
+    //console.log(newValues);
+  };
+
   render() {
     console.log(this.state);
 
     return (
       <Jumbotron>
-        <h1>khdfgdskufdsgkuf</h1>
-        <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 offset-3 float-md-center">
+        <div
+          style={{
+            backgroundColor: "white",
+            padding: "30px 20px 70px 20px ",
+            WebkitBoxShadow: "0 0 10px #999"
+          }}
+          className="col-lg-9 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-2 float-lg-center"
+        >
           <Form onSubmit={this.handleSubmit}>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="name">Name</Label>
+                  <Label for="examplename">Name</Label>
                   <Input
                     type="text"
                     name="name"
-                    id="examplename"
                     placeholder="Enter name"
                     onChange={this.handleChange}
                   />
@@ -96,14 +119,13 @@ class School extends Component {
                   <Input
                     type="text"
                     name="school_number"
-                    id="exampleschool_number"
                     placeholder="Enter school_number"
                     onChange={this.handleChange}
                   />
                 </FormGroup>
               </Col>
             </Row>
-            <Nav tabs>
+            <Nav tabs style={{ cursor: "pointer" }}>
               <NavItem>
                 <NavLink
                   className={classnames({
@@ -113,7 +135,7 @@ class School extends Component {
                     this.toggleTab("1");
                   }}
                 >
-                  Tab1
+                  Contact Data
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -125,42 +147,62 @@ class School extends Component {
                     this.toggleTab("2");
                   }}
                 >
-                  Moar Tabs
+                  Contract Documents
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "3"
+                  })}
+                  onClick={() => {
+                    this.toggleTab("3");
+                  }}
+                >
+                  Groups
+                </NavLink>
+              </NavItem>
+
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "4"
+                  })}
+                  onClick={() => {
+                    this.toggleTab("4");
+                  }}
+                >
+                  Care Model
                 </NavLink>
               </NavItem>
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
                 <ContactData
-                  onContactChange={this.onContactChange}
-
-                  //value={this.state.name}
-                  //name={this.state.name}
+                  onDataChange={this.onDataChange}
+                  handleNameChange={this.handleNameChange}
                 />
               </TabPane>
               <TabPane tabId="2">
-                <Row>
-                  <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>
-                        With supporting text below as a natural lead-in to
-                        additional content.
-                      </CardText>
-                      <Button>Go somewhere</Button>
-                    </Card>
-                  </Col>
-                  <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>
-                        With supporting text below as a natural lead-in to
-                        additional content.
-                      </CardText>
-                      <Button>Go somewhere</Button>
-                    </Card>
-                  </Col>
-                </Row>
+                <ContractDocuments
+                  onDataChange={this.onDataChange}
+                  handleNameChange={this.handleNameChange}
+                />
+              </TabPane>
+
+              <TabPane tabId="3">
+                <Grupe
+                  onDataChange={this.onDataChange}
+                  handleNameChange={this.handleNameChange}
+                />
+              </TabPane>
+
+              <TabPane tabId="4">
+                <CareModel
+                  onDataChange={this.onDataChange}
+                  handleNameChange={this.handleNameChange}
+                  handleTimeChange={this.handleTimeChange}
+                />
               </TabPane>
             </TabContent>
 

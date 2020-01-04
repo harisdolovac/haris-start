@@ -6,7 +6,7 @@ export const newAxios = axios.create({
 
 export const setAuthToken = token => {
   if (token) {
-    console.log(token);
+    // console.log(token);
 
     newAxios.defaults.headers.common["Authorization"] = `JWT ${token}`;
   } else {

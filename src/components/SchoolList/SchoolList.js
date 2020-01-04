@@ -11,7 +11,7 @@ class CardSkole extends Component {
 
   componentDidMount() {
     newAxios.get("school/school/").then(res => {
-      console.log(res);
+      //console.log(res);
 
       this.setState({
         results: res.data.results
