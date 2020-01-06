@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Card, Button, CardTitle, CardText, Row, Col } from "reactstrap";
+import {
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+  CardHeader
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import { newAxios } from "../Axios/NewAxios";
 import "./SchoolList.css";
@@ -11,7 +19,7 @@ class CardSkole extends Component {
 
   componentDidMount() {
     newAxios.get("school/school/").then(res => {
-      //console.log(res);
+      //  console.log("axiso data:", res);
 
       this.setState({
         results: res.data.results
@@ -20,22 +28,27 @@ class CardSkole extends Component {
   }
 
   render() {
-    //console.log(this.state);
+    //  console.log("sad sto radim", this.state);
 
     return (
       <div>
-        <h1>Broj Skola - </h1>
+        <h1>Broj Skola - {this.state.results.length} </h1>
 
         <Row>
           {this.state.results.map((school, i) => (
             <Col sm="3" key={i}>
-              <Card body>
-                <h1>Ime Skole : {school.name}</h1>
+              <CardHeader className="CardHeader">{school.name}</CardHeader>
+              <Card body className="cardBody">
                 <CardTitle>City:{school.city}</CardTitle>
                 <CardText>Some textt</CardText>
                 <p>max_children:{school.max_children}</p>
                 <p>{school.created_at}</p>
-                <Button>Go somewhere</Button>
+                <div>
+                  <Button>Go somewhere</Button>
+                  <span className="fa-border-icon">
+                    <i className="fas fa-edit  fa-lg"></i>
+                  </span>
+                </div>
               </Card>
             </Col>
           ))}

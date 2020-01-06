@@ -77,18 +77,20 @@ class Days extends Component {
             {this.state.days.map((day, i) => (
               <tr key={day + i}>
                 <td>{this.getWeekDayName(day.week_day)}</td>
+
                 <td>
                   <input
-                    style={{ width: "30%" }}
+                    style={{ width: "60%" }}
                     type="text"
                     name="time_from"
                     value={day.time_from}
                     onChange={e => this.handleChange(e, i)}
                   />
                 </td>
+
                 <td>
                   <input
-                    style={{ width: "30%" }}
+                    style={{ width: "60%" }}
                     type="text"
                     name="time_to"
                     value={day.time_to}

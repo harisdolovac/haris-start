@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Button, FormGroup, Input, Row, Col } from "reactstrap";
-//import Test2 from "./Test2";
-import Fees from "./Fees";
+import YearlyFees from "./YearlyFees";
+import MonthlyFees from "./MonthlyFees";
+import MonthlyDiscounts from "./MonthlyDiscounts";
+
 import Days from "./Days";
+import SchoolList from "../SchoolList/SchoolList";
 
 class CareModel extends Component {
   state = {
@@ -25,8 +28,8 @@ class CareModel extends Component {
             { week_day: 7, time_from: "00:00", time_to: "00:00" }
           ],
           monthly_fees: [{ account: "", price: "" }],
-          yearly_fees: [],
-          monthly_discounts: []
+          yearly_fees: [{ account: "", price: "" }],
+          monthly_discounts: [{ account: "", price: "" }]
         }
       ]
     });
@@ -86,7 +89,7 @@ class CareModel extends Component {
   };
 
   render() {
-    console.log("ovaj state je:,", this.state);
+    //console.log("ovaj state je:,", this.state);
 
     return (
       <div>
@@ -126,20 +129,37 @@ class CareModel extends Component {
                   name={service.name}
                 />
               </Col>
-              <Col md={5}>
-                <Fees
+              <Col md={6}>
+                <MonthlyFees
+                  handleChange={this.handleChange}
                   monthly_fees={service.monthly_fees}
                   name={service.name}
+                  serviceIndex={i}
                   services={this.state.services}
-                  handleDelete={this.state.handleDelete}
-                  handleNameChange={this.state.handleNameChange}
-                  handleAddClick={this.handleAddClick}
+                />
+              </Col>
+              <Col md={6}>
+                <YearlyFees
+                  handleChange={this.handleChange}
+                  yearly_fees={service.yearly_fees}
+                  name={service.name}
+                  serviceIndex={i}
+                  services={this.state.services}
+                />
+              </Col>
+              <Col md={8}>
+                <MonthlyDiscounts
+                  handleChange={this.handleChange}
+                  monthly_discounts={service.monthly_discounts}
+                  name={service.name}
+                  serviceIndex={i}
+                  services={this.state.services}
                 />
               </Col>
             </Row>
           </div>
         ))}
-
+        <SchoolList />
         <Button outline color="primary" size="sm" onClick={this.handleAddClick}>
           <i className="fas fa-plus "> Dodaj celu listu</i>
         </Button>

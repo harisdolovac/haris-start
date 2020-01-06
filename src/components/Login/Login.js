@@ -19,7 +19,6 @@ class Login extends Component {
       localStorage.setItem("user", user);
       setAuthToken(res.data.token);
 
-      console.log(res);
       if (this.login) {
         this.props.history.push("/");
       }

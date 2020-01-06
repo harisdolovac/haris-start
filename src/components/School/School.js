@@ -24,7 +24,7 @@ import CareModel from "../SchoolChange/CareModel/CareModel";
 
 class School extends Component {
   state = {
-    activeTab: "4",
+    activeTab: "1",
 
     name: "",
     school_number: "",
@@ -66,6 +66,18 @@ class School extends Component {
       .post("school/school/", this.state)
       .then(this.props.history.push("/"));
   };
+
+  // handleClick = e => {
+  //   e.preventDefault();
+
+  //   const data = {
+  //     value: this.state.value
+  //   };
+
+  //   newAxios.post("school/school/", { data }).then(res => {
+  //     console.log(data);
+  //   });
+  // };
 
   toggleTab = num => {
     this.setState({
@@ -210,7 +222,7 @@ class School extends Component {
               Cancel
             </Button>
             <Button
-              onClick={this.handleClick}
+              onClick={this.handleSubmit}
               color="primary"
               className="float-right"
               style={{ marginRight: "10px" }}

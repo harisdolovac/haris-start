@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Table,
   Button,
-  Form,
   Input,
   Row,
   Col,
@@ -10,7 +9,7 @@ import {
   InputGroupAddon
 } from "reactstrap";
 
-class Test extends Component {
+class monthly_fees extends Component {
   state = { monthly_fees: this.props.monthly_fees };
 
   handleChange = (e, i) => {
@@ -20,7 +19,7 @@ class Test extends Component {
       monthly_fees: newValues
     });
 
-    //this.props.handleNameChange(e.target.name, e.target.value);
+    this.props.handleChange(this.props.serviceIndex, "monthly_fees", newValues);
   };
 
   handleAddClick = e => {
@@ -39,7 +38,7 @@ class Test extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    console.log(this.state.value);
+    //console.log(this.state.value);
   };
 
   handleDelete = i => {
@@ -51,11 +50,11 @@ class Test extends Component {
   };
 
   render() {
-    console.log("od fijeva jeL", this.state);
+    //console.log("od fijeva jeL", this.state);
 
     return (
       <Row>
-        <Form onSubmit={this.handleSubmit}>
+        <div onSubmit={this.handleSubmit}>
           <Table bordered style={{ width: "100%" }}>
             <thead>
               <tr>
@@ -63,7 +62,7 @@ class Test extends Component {
                   colSpan="4"
                   style={{ textAlign: "center", backgroundColor: "#eefdfd" }}
                 >
-                  monatliche Leistungsarten und Grundgebühren -{this.props.name}
+                  monthly types of benefits and basic fees-{this.props.name}
                 </th>
               </tr>
               <tr style={{ backgroundColor: "#eefdfd" }}>
@@ -79,8 +78,8 @@ class Test extends Component {
                   <td>
                     <Input
                       type="select"
-                      onChange={e => this.handleChange(i)}
-                      name="name"
+                      onChange={e => this.handleChange(e, i)}
+                      name="account"
                     >
                       <option disabled style={{ fontSize: "13px" }}>
                         Childcare Fees
@@ -104,7 +103,7 @@ class Test extends Component {
                   <td>
                     <InputGroup>
                       <Input
-                        onChange={e => this.handleChange(i)}
+                        onChange={e => this.handleChange(e, i)}
                         placeholder="Amount"
                         min={0}
                         max={100}
@@ -131,7 +130,7 @@ class Test extends Component {
               </tbody>
             ))}
           </Table>
-        </Form>
+        </div>
         <Button outline color="primary" size="sm" onClick={this.handleAddClick}>
           <i className="fas fa-plus "> Add more grant fields</i>
         </Button>
@@ -140,4 +139,4 @@ class Test extends Component {
   }
 }
 
-export default Test;
+export default monthly_fees;
