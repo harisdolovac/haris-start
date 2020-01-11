@@ -13,6 +13,7 @@ class ContactData extends Component {
     fax_number: "",
     mobile_number: "",
     emergency_number: "",
+    poison_emergency_number: "",
     website: "",
     extra: []
   };
@@ -54,7 +55,10 @@ class ContactData extends Component {
   };
 
   render() {
-    //console.log(this.state);
+    const { data } = this.props;
+    // console.log("props koje primam u cd", data.state.school.address);
+    console.log("props koje primam u data", this.props);
+    // console.log("props za grupe");
 
     return (
       <div>
@@ -66,7 +70,7 @@ class ContactData extends Component {
                 type="text"
                 name="address"
                 onChange={this.handleChange}
-                value={this.state.address}
+                value={data.data.school.address}
               />
             </FormGroup>
           </Col>
@@ -78,7 +82,7 @@ class ContactData extends Component {
                 name="city"
                 id="exampleCity"
                 onChange={this.handleChange}
-                value={this.state.city}
+                value={data.data.school.city}
               />
             </FormGroup>
           </Col>
@@ -90,7 +94,7 @@ class ContactData extends Component {
                 name="postal_code"
                 id="exampleCode"
                 onChange={this.handleChange}
-                value={this.state.number}
+                value={data.data.school.number}
               />
             </FormGroup>
           </Col>
@@ -102,7 +106,7 @@ class ContactData extends Component {
                 name="phone_number1"
                 id="examplePhoneNumber"
                 onChange={this.handleChange}
-                value={this.state.phone_number1}
+                value={data.data.school.phone_number1}
               />
             </FormGroup>
           </Col>
@@ -114,7 +118,7 @@ class ContactData extends Component {
                 name="phone_number2"
                 id="examplePhoneNumber2"
                 onChange={this.handleChange}
-                value={this.state.phone_number2}
+                value={data.data.school.phone_number2}
               />
             </FormGroup>
           </Col>
@@ -126,7 +130,7 @@ class ContactData extends Component {
                 name="email"
                 id="exampleEmail"
                 onChange={this.handleChange}
-                value={this.state.email}
+                value={data.data.school.email}
               />
             </FormGroup>
           </Col>
@@ -138,7 +142,7 @@ class ContactData extends Component {
                 name="fax_number"
                 id="exampleFaxNumber"
                 onChange={this.handleChange}
-                value={this.state.fax_number}
+                value={data.data.school.fax_number1}
               />
             </FormGroup>
           </Col>
@@ -150,7 +154,7 @@ class ContactData extends Component {
                 name="mobile_number"
                 id="exampleMobileNumber"
                 onChange={this.handleChange}
-                value={this.state.mobile_number}
+                value={data.data.school.mobile_number}
               />
             </FormGroup>
           </Col>
@@ -162,7 +166,7 @@ class ContactData extends Component {
                 name="website"
                 id="exampleWebsite"
                 onChange={this.handleChange}
-                value={this.state.website}
+                value={data.data.school.website}
               />
             </FormGroup>
           </Col>
@@ -174,7 +178,7 @@ class ContactData extends Component {
                 name="emergency_number"
                 id="exampleEmergencyNumber"
                 onChange={this.handleChange}
-                value={this.state.emergency_number}
+                value={data.data.emergency_number}
               />
             </FormGroup>
           </Col>
@@ -186,7 +190,7 @@ class ContactData extends Component {
                 name="poison_emergency_number"
                 id="exampleEmergencyNumber2"
                 onChange={this.handleChange}
-                value={this.state.poison_emergency_number}
+                value={data.data.poison_emergency_number}
               />
             </FormGroup>
           </Col>

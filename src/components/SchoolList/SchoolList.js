@@ -19,8 +19,7 @@ class CardSkole extends Component {
 
   componentDidMount() {
     newAxios.get("school/school/").then(res => {
-      //  console.log("axiso data:", res);
-
+      console.log("axios data:", res);
       this.setState({
         results: res.data.results
       });
@@ -28,7 +27,7 @@ class CardSkole extends Component {
   }
 
   render() {
-    //  console.log("sad sto radim", this.state);
+    //console.log("sad sto radim", this.state);
 
     return (
       <div>
@@ -45,9 +44,16 @@ class CardSkole extends Component {
                 <p>{school.created_at}</p>
                 <div>
                   <Button>Go somewhere</Button>
-                  <span className="fa-border-icon">
-                    <i className="fas fa-edit  fa-lg"></i>
-                  </span>
+                  <Link
+                    to={{
+                      pathname: `/editSchool/${school.id}`,
+                      state: { school }
+                    }}
+                  >
+                    <span className="fa-border-icon">
+                      <i className="fas fa-edit  fa-lg"></i>
+                    </span>
+                  </Link>
                 </div>
               </Card>
             </Col>

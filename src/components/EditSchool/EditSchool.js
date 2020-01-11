@@ -86,6 +86,15 @@ class School extends Component {
     });
   };
 
+  componentDidMount() {
+    newAxios.get("school/school/").then(res => {
+      console.log("axios data:", res);
+      this.setState({
+        data: res.data.results
+      });
+    });
+  }
+
   render() {
     // console.log("error su :", this.state.errors);
     console.log("edit state je:", this.props.stateData);
