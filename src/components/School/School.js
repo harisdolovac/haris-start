@@ -64,7 +64,6 @@ class School extends Component {
     this.setState({
       data
     });
-    console.log("data iz skole ", data);
   };
 
   handleSubmit = async e => {
@@ -87,8 +86,7 @@ class School extends Component {
   };
 
   render() {
-    // console.log("error su :", this.state.errors);
-    console.log("edit state je:", this.props.stateData);
+    const { data } = this.state.data;
 
     return (
       <Jumbotron>

@@ -64,7 +64,6 @@ class School extends Component {
     this.setState({
       data
     });
-    console.log("data iz skole ", data);
   };
 
   handleSubmit = async e => {
@@ -87,17 +86,17 @@ class School extends Component {
   };
 
   componentDidMount() {
-    newAxios.get("school/school/").then(res => {
-      console.log("axios data:", res);
+    const id = this.props.history.location.state.school.id;
+    newAxios.get(`school/school/${id}/`).then(res => {
       this.setState({
-        data: res.data.results
+        data: res.data
       });
     });
   }
 
   render() {
-    // console.log("error su :", this.state.errors);
-    console.log("edit state je:", this.props.stateData);
+    const { data } = this.state;
+    //   console.log(data);
 
     return (
       <Jumbotron>
@@ -119,6 +118,7 @@ class School extends Component {
                     name="name"
                     placeholder="Enter name"
                     onChange={this.handleChange}
+                    value={this.state.data.name}
                   />
                   <small>
                     <span style={{ color: "red" }}>
@@ -135,6 +135,7 @@ class School extends Component {
                     name="school_number"
                     placeholder="Enter school_number"
                     onChange={this.handleChange}
+                    value={data.school_number}
                   />
                 </FormGroup>
               </Col>
@@ -192,7 +193,10 @@ class School extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <ContactData onDataChange={this.onDataChange} />
+                <ContactData
+                  onDataChange={this.onDataChange}
+                  stateData={this.state.data}
+                />
               </TabPane>
               <TabPane tabId="2">
                 <ContractDocuments

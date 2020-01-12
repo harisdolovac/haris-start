@@ -49,12 +49,8 @@ class ContactData extends Component {
     this.props.onDataChange("extra", newValues);
   };
 
-  handleEdit = i => {
-    console.log(i);
-  };
-
   render() {
-    //console.log(this.state);
+    console.log("od props za contact data data", this.props.stateData);
 
     return (
       <div>
@@ -66,7 +62,7 @@ class ContactData extends Component {
                 type="text"
                 name="address"
                 onChange={this.handleChange}
-                value={this.state.address}
+                value={this.props.stateData.data.address}
               />
             </FormGroup>
           </Col>

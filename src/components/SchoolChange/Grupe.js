@@ -48,9 +48,9 @@ class Grupe extends Component {
   };
 
   render() {
-    console.log(this.props.errors);
+    // console.log(this.props.errors);
 
-    console.log(this.state.errors);
+    // console.log(this.state.errors);
 
     return (
       <div style={{ paddingTop: "30px" }}>
