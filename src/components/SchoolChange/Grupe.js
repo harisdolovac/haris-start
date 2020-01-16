@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Col, Row, Button, FormGroup, Label, Alert } from "reactstrap";
+import { Input, Col, Row, Button, FormGroup, Label } from "reactstrap";
 
 class Grupe extends Component {
   state = {

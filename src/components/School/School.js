@@ -86,7 +86,6 @@ class School extends Component {
   };
 
   render() {
-    const { data } = this.state.data;
     console.log("glavni state:", this.state);
 
     return (
