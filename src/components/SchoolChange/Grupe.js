@@ -92,11 +92,18 @@ class Grupe extends Component {
                   value={item.name}
                   id={item.id}
                   onChange={this.onDataChange(i)}
+                  style={{
+                    border:
+                      this.state.errors[i] && this.state.errors[i].name
+                        ? "1px solid #ff0000"
+                        : ""
+                  }}
                 />
-
-                <Alert color="warning">
-                  {this.state.errors[i] && this.state.errors[i].name}
-                </Alert>
+                <small>
+                  <span className="text-danger">
+                    {this.state.errors[i] && this.state.errors[i].name}
+                  </span>
+                </small>
               </FormGroup>
             </Col>
             <Col md={3}>
@@ -107,10 +114,18 @@ class Grupe extends Component {
                   value={item.group_type}
                   id={item.id}
                   onChange={this.onDataChange(i)}
+                  style={{
+                    border:
+                      this.state.errors[i] && this.state.errors[i].group_type
+                        ? "1px solid #ff0000"
+                        : ""
+                  }}
                 />
-                <span>
-                  {this.state.errors[i] && this.state.errors[i].group_type}
-                </span>
+                <small>
+                  <span className="text-danger">
+                    {this.state.errors[i] && this.state.errors[i].group_type}
+                  </span>
+                </small>
               </FormGroup>
             </Col>
             <Col md={2}>
@@ -121,10 +136,18 @@ class Grupe extends Component {
                   value={item.max_children}
                   id={item.id}
                   onChange={this.onDataChange(i)}
+                  style={{
+                    border:
+                      this.state.errors[i] && this.state.errors[i].max_children
+                        ? "1px solid #ff0000"
+                        : ""
+                  }}
                 />
-                <span>
-                  {this.state.errors[i] && this.state.errors[i].max_children}
-                </span>
+                <small>
+                  <span className="text-danger">
+                    {this.state.errors[i] && this.state.errors[i].max_children}
+                  </span>
+                </small>
               </FormGroup>
             </Col>
             <Col md={2}>
@@ -135,10 +158,18 @@ class Grupe extends Component {
                   value={item.years_from}
                   id={item.id}
                   onChange={this.onDataChange(i)}
+                  style={{
+                    border:
+                      this.state.errors[i] && this.state.errors[i].years_from
+                        ? "1px solid #ff0000"
+                        : ""
+                  }}
                 />
-                <span>
-                  {this.state.errors[i] && this.state.errors[i].years_from}
-                </span>
+                <small>
+                  <span className="text-danger">
+                    {this.state.errors[i] && this.state.errors[i].years_from}
+                  </span>
+                </small>
               </FormGroup>
             </Col>
             <Col md={2}>
@@ -149,10 +180,18 @@ class Grupe extends Component {
                   value={item.years_to}
                   id={item.id}
                   onChange={this.onDataChange(i)}
+                  style={{
+                    border:
+                      this.state.errors[i] && this.state.errors[i].years_to
+                        ? "1px solid #ff0000"
+                        : ""
+                  }}
                 />
-                <span>
-                  {this.state.errors[i] && this.state.errors[i].years_to}
-                </span>
+                <small>
+                  <span className="text-danger">
+                    {this.state.errors[i] && this.state.errors[i].years_to}
+                  </span>
+                </small>
               </FormGroup>
             </Col>
             <FormGroup>

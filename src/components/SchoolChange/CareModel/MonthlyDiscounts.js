@@ -42,7 +42,7 @@ class Monthly extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    console.log(this.state.value);
+    // console.log(this.state.value);
   };
 
   handleDelete = i => {
@@ -54,7 +54,7 @@ class Monthly extends Component {
   };
 
   render() {
-    console.log("od monthly diskaunts", this.state);
+    //  console.log("od monthly diskaunts", this.state);
 
     return (
       <Row>

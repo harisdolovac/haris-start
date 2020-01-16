@@ -70,7 +70,11 @@ class School extends Component {
     e.preventDefault();
 
     try {
-      const response = await newAxios.post("school/school/", this.state.data);
+      const id = this.props.history.location.state.school.id;
+      const response = await newAxios.post(
+        `school/school/${id}/`,
+        this.state.data
+      );
       this.props.history.push("/");
     } catch (error) {
       this.setState({
@@ -95,8 +99,9 @@ class School extends Component {
   }
 
   render() {
+    console.log("glavni data", this.state);
+
     const { data } = this.state;
-    //   console.log(data);
 
     return (
       <Jumbotron>
@@ -119,6 +124,12 @@ class School extends Component {
                     placeholder="Enter name"
                     onChange={this.handleChange}
                     value={this.state.data.name}
+                    style={{
+                      border:
+                        this.state.errors && this.state.errors.name
+                          ? "1px solid #ff0000"
+                          : ""
+                    }}
                   />
                   <small>
                     <span style={{ color: "red" }}>
@@ -195,13 +206,15 @@ class School extends Component {
               <TabPane tabId="1">
                 <ContactData
                   onDataChange={this.onDataChange}
-                  stateData={this.state.data}
+                  data={this.state.data}
+                  errors={this.state.errors}
                 />
               </TabPane>
               <TabPane tabId="2">
                 <ContractDocuments
                   onDataChange={this.onDataChange}
                   errors={this.state.errors}
+                  data={this.state.data}
                 />
               </TabPane>
 
@@ -209,11 +222,16 @@ class School extends Component {
                 <Grupe
                   onDataChange={this.onDataChange}
                   errors={this.state.errors.groups}
+                  data={this.state.data}
                 />
               </TabPane>
 
               <TabPane tabId="4">
-                <CareModel onDataChange={this.onDataChange} />
+                <CareModel
+                  onDataChange={this.onDataChange}
+                  errors={this.state.errors.groups}
+                  data={this.state.data}
+                />
               </TabPane>
             </TabContent>
 

@@ -3,54 +3,58 @@ import React, { Component } from "react";
 import { Col, Row, FormGroup, Label, Input, Button } from "reactstrap";
 
 class ContactData extends Component {
-  state = {
-    address: "",
-    city: "",
-    postal_code: null,
-    phone_number1: "",
-    phone_number2: "",
-    email: "",
-    fax_number: "",
-    mobile_number: "",
-    emergency_number: "",
-    website: "",
-    extra: []
-  };
+  state = {};
+
+  componentWillReceiveProps({ data, errors }) {
+    this.setState({ data, errors });
+    //   console.log("cdm1", data);
+  }
+
+  componentWillMount() {
+    const { data } = this.props;
+    this.setState({ data });
+    //console.log("cdm", data);
+  }
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    const data = this.state.data;
+    data[e.target.name] = e.target.value;
+    this.setState({ data });
     this.props.onDataChange(e.target.name, e.target.value);
   };
 
   onExtraAdd = e => {
     e.preventDefault();
-    this.setState({
-      extra: [
-        ...this.state.extra,
-        { email: "", function: "", name: "", phone: "" }
-      ]
-    });
+    const extra = this.state.data.extra;
+    extra.push({ email: "", function: "", name: "", phone: "" });
+    const data = this.state.data;
+
+    data["extra"] = extra;
+    this.setState({ data });
   };
 
   handleDelete = i => {
-    const extra = this.state.extra;
+    const extra = this.state.data.extra;
+    const data = this.state.data;
     extra.splice(i, 1);
-    this.setState({ extra: extra });
+    data["extra"] = extra;
+    this.setState({ data });
   };
 
   onDataChange = i => e => {
-    const newValues = this.state.extra;
+    const newValues = this.state.data.extra;
     //console.log(newValues);
     newValues[i][e.target.name] = e.target.value;
+    const data = this.state.data;
 
-    this.setState({ extra: newValues });
+    data["extra"] = newValues;
+
+    this.setState({ data });
     this.props.onDataChange("extra", newValues);
   };
 
   render() {
-    console.log("od props za contact data data", this.props.stateData);
+    console.log("state", this.state);
 
     return (
       <div>
@@ -62,7 +66,7 @@ class ContactData extends Component {
                 type="text"
                 name="address"
                 onChange={this.handleChange}
-                value={this.props.stateData.data.address}
+                value={this.state.data.address}
               />
             </FormGroup>
           </Col>
@@ -74,7 +78,7 @@ class ContactData extends Component {
                 name="city"
                 id="exampleCity"
                 onChange={this.handleChange}
-                value={this.state.city}
+                value={this.state.data.city}
               />
             </FormGroup>
           </Col>
@@ -86,8 +90,19 @@ class ContactData extends Component {
                 name="postal_code"
                 id="exampleCode"
                 onChange={this.handleChange}
-                value={this.state.number}
+                value={this.state.data.number}
+                style={{
+                  border:
+                    this.state.errors && this.state.errors.postal_code
+                      ? "1px solid #ff0000"
+                      : ""
+                }}
               />
+              <small>
+                <span className="text-danger">
+                  {this.state.errors && this.state.errors.postal_code}
+                </span>
+              </small>
             </FormGroup>
           </Col>
           <Col md={3}>
@@ -98,7 +113,7 @@ class ContactData extends Component {
                 name="phone_number1"
                 id="examplePhoneNumber"
                 onChange={this.handleChange}
-                value={this.state.phone_number1}
+                value={this.state.data.phone_number1}
               />
             </FormGroup>
           </Col>
@@ -110,7 +125,7 @@ class ContactData extends Component {
                 name="phone_number2"
                 id="examplePhoneNumber2"
                 onChange={this.handleChange}
-                value={this.state.phone_number2}
+                value={this.state.data.phone_number2}
               />
             </FormGroup>
           </Col>
@@ -122,7 +137,7 @@ class ContactData extends Component {
                 name="email"
                 id="exampleEmail"
                 onChange={this.handleChange}
-                value={this.state.email}
+                value={this.state.data.email}
               />
             </FormGroup>
           </Col>
@@ -134,7 +149,7 @@ class ContactData extends Component {
                 name="fax_number"
                 id="exampleFaxNumber"
                 onChange={this.handleChange}
-                value={this.state.fax_number}
+                value={this.state.data.fax_number}
               />
             </FormGroup>
           </Col>
@@ -146,7 +161,7 @@ class ContactData extends Component {
                 name="mobile_number"
                 id="exampleMobileNumber"
                 onChange={this.handleChange}
-                value={this.state.mobile_number}
+                value={this.state.data.mobile_number}
               />
             </FormGroup>
           </Col>
@@ -158,7 +173,7 @@ class ContactData extends Component {
                 name="website"
                 id="exampleWebsite"
                 onChange={this.handleChange}
-                value={this.state.website}
+                value={this.state.data.website}
               />
             </FormGroup>
           </Col>
@@ -170,7 +185,7 @@ class ContactData extends Component {
                 name="emergency_number"
                 id="exampleEmergencyNumber"
                 onChange={this.handleChange}
-                value={this.state.emergency_number}
+                value={this.state.data.emergency_number}
               />
             </FormGroup>
           </Col>
@@ -182,7 +197,7 @@ class ContactData extends Component {
                 name="poison_emergency_number"
                 id="exampleEmergencyNumber2"
                 onChange={this.handleChange}
-                value={this.state.poison_emergency_number}
+                value={this.state.data.poison_emergency_number}
               />
             </FormGroup>
           </Col>
@@ -213,7 +228,7 @@ class ContactData extends Component {
             </FormGroup>
           </Col>
 
-          {this.state.extra.map((item, i) => (
+          {this.state.data.extra.map((item, i) => (
             <Row key={i}>
               <Col>
                 <FormGroup key={i}>
@@ -256,7 +271,7 @@ class ContactData extends Component {
                   />
                 </FormGroup>
               </Col>
-              <button onClick={this.handleEdit(i)}>novo dugme</button>
+
               <Col md={1}>
                 <i
                   onClick={() => this.handleDelete(i)}

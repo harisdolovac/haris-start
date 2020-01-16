@@ -87,6 +87,7 @@ class School extends Component {
 
   render() {
     const { data } = this.state.data;
+    console.log("glavni state:", this.state);
 
     return (
       <Jumbotron>
@@ -108,6 +109,12 @@ class School extends Component {
                     name="name"
                     placeholder="Enter name"
                     onChange={this.handleChange}
+                    style={{
+                      border:
+                        this.state.errors && this.state.errors.name
+                          ? "1px solid #ff0000"
+                          : ""
+                    }}
                   />
                   <small>
                     <span style={{ color: "red" }}>
@@ -181,10 +188,15 @@ class School extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <ContactData onDataChange={this.onDataChange} />
+                <ContactData
+                  onDataChange={this.onDataChange}
+                  data={this.state.data}
+                  errors={this.state.errors}
+                />
               </TabPane>
               <TabPane tabId="2">
                 <ContractDocuments
+                  data={this.state.data}
                   onDataChange={this.onDataChange}
                   errors={this.state.errors}
                 />
@@ -192,13 +204,18 @@ class School extends Component {
 
               <TabPane tabId="3">
                 <Grupe
+                  data={this.state.data}
                   onDataChange={this.onDataChange}
                   errors={this.state.errors.groups}
                 />
               </TabPane>
 
               <TabPane tabId="4">
-                <CareModel onDataChange={this.onDataChange} />
+                <CareModel
+                  onDataChange={this.onDataChange}
+                  data={this.state.data}
+                  errors={this.state.errors.groups}
+                />
               </TabPane>
             </TabContent>
 

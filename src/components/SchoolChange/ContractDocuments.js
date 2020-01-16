@@ -6,6 +6,7 @@ class ContractDocuments extends Component {
     school_type: "",
     identification_number: "",
     max_children: "",
+    weekly_working_hours: "",
     grants: []
   };
 
@@ -42,12 +43,12 @@ class ContractDocuments extends Component {
   };
 
   render() {
-    //console.log(this.state);
+    console.log("props state:", this.state);
 
     return (
       <div>
         <Row form>
-          <Col md={12}>
+          <Col md={6}>
             <FormGroup>
               <Label for="school_type">Type of Institution</Label>
               <Input
@@ -56,6 +57,28 @@ class ContractDocuments extends Component {
                 onChange={this.handleChange}
                 value={this.state.school_type}
               />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="weekly_working_hours">Weekly Working Hours</Label>
+              <Input
+                type="text"
+                name="weekly_working_hours"
+                onChange={this.handleChange}
+                value={this.state.weekly_working_hours}
+                style={{
+                  border:
+                    this.state.errors && this.state.errors.weekly_working_hours
+                      ? "1px solid #ff0000"
+                      : ""
+                }}
+              />
+              <small>
+                <span className="text-danger">
+                  {this.state.errors && this.state.errors.weekly_working_hours}
+                </span>
+              </small>
             </FormGroup>
           </Col>
           <Col md={6}>
@@ -72,7 +95,7 @@ class ContractDocuments extends Component {
           </Col>
           <Col md={6}>
             <FormGroup>
-              <Label for="max_children">Places acc. approval</Label>
+              <Label for="max_children">Max Children</Label>
               <Input
                 name="max_children"
                 onChange={this.handleChange}
@@ -105,6 +128,11 @@ class ContractDocuments extends Component {
                     onChange={this.onDataChange(i)}
                     value={grant.name}
                   />
+                  {/* <small>
+                    <span className="text-danger">
+                      {this.state.errors[i] && this.state.errors[i].name}
+                    </span>
+                  </small> */}
                 </FormGroup>
               </Col>
               <Col md={4}>
