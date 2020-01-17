@@ -71,7 +71,7 @@ class School extends Component {
 
     try {
       const id = this.props.history.location.state.school.id;
-      const response = await newAxios.post(
+      const response = await newAxios.put(
         `school/school/${id}/`,
         this.state.data
       );
@@ -99,7 +99,7 @@ class School extends Component {
   }
 
   render() {
-    console.log("glavni data", this.state);
+    //console.log("glavni data", this.state);
 
     const { data } = this.state;
 
@@ -244,7 +244,7 @@ class School extends Component {
               className="float-right"
               style={{ marginRight: "10px" }}
             >
-              Create a School
+              Edit School
             </Button>
           </Form>
         </div>

@@ -7,6 +7,11 @@ class Grupe extends Component {
     errors: []
   };
 
+  //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
+  componentWillReceiveProps(props) {
+    console.log("cwrp", props);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.errors !== this.props.errors) {
       this.setState({
@@ -48,7 +53,7 @@ class Grupe extends Component {
   };
 
   render() {
-    // console.log(this.props.errors);
+    console.log(this.state, "grupe");
 
     // console.log(this.state.errors);
 

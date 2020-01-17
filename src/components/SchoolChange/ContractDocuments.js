@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { Row, Col, FormGroup, Label, Input, Button } from "reactstrap";
 
 class ContractDocuments extends Component {
-  state = {
-    school_type: "",
-    identification_number: "",
-    max_children: "",
-    weekly_working_hours: "",
-    grants: []
-  };
+  state = {};
+  componentWillReceiveProps({ data, errors }) {
+    this.setState({ data, errors });
+    //  console.log("cdm1", errors);
+  }
+  componentWillMount() {
+    const { data } = this.props;
+    this.setState({ data });
+    //console.log("cdm", data);
+  }
 
   handleChange = e => {
     this.setState({
@@ -18,7 +21,7 @@ class ContractDocuments extends Component {
   };
 
   onDataChange = i => e => {
-    const newValues = this.state.grants;
+    const newValues = this.state.data.grants;
     //console.log(newValues);
     newValues[i][e.target.name] = e.target.value;
 
@@ -26,24 +29,25 @@ class ContractDocuments extends Component {
     this.props.onDataChange("grants", newValues);
   };
 
-  handleClick = e => {
+  handleAddClick = e => {
     e.preventDefault();
+    let grants = this.state.data.grants;
+    grants.push({ name: "", contractor: "", date: "", document: null });
+    const data = this.state.data;
+    data["grants"] = grants;
     this.setState({
-      grants: [
-        ...this.state.grants,
-        { name: "", contractor: "", date: "", document: null }
-      ]
+      data
     });
   };
 
   handleDelete = i => {
-    const grants = this.state.grants;
+    const grants = this.state.data.grants;
     grants.splice(i, 1);
     this.setState({ grants: grants });
   };
 
   render() {
-    console.log("props state:", this.state);
+    //  console.log("props state:", this.state);
 
     return (
       <div>
@@ -55,7 +59,7 @@ class ContractDocuments extends Component {
                 type="text"
                 name="school_type"
                 onChange={this.handleChange}
-                value={this.state.school_type}
+                value={this.state.data.school_type}
               />
             </FormGroup>
           </Col>
@@ -66,17 +70,19 @@ class ContractDocuments extends Component {
                 type="text"
                 name="weekly_working_hours"
                 onChange={this.handleChange}
-                value={this.state.weekly_working_hours}
+                value={this.state.data.weekly_working_hours}
                 style={{
                   border:
-                    this.state.errors && this.state.errors.weekly_working_hours
+                    this.state.data.errors &&
+                    this.state.errors.data.weekly_working_hours
                       ? "1px solid #ff0000"
                       : ""
                 }}
               />
               <small>
                 <span className="text-danger">
-                  {this.state.errors && this.state.errors.weekly_working_hours}
+                  {this.state.data.errors &&
+                    this.state.errors.data.weekly_working_hours}
                 </span>
               </small>
             </FormGroup>
@@ -89,7 +95,7 @@ class ContractDocuments extends Component {
               <Input
                 name="identification_number"
                 onChange={this.handleChange}
-                value={this.state.identification_number}
+                value={this.state.data.identification_number}
               />
             </FormGroup>
           </Col>
@@ -99,7 +105,7 @@ class ContractDocuments extends Component {
               <Input
                 name="max_children"
                 onChange={this.handleChange}
-                value={this.state.max_children}
+                value={this.state.data.max_children}
               />
             </FormGroup>
           </Col>
@@ -119,7 +125,7 @@ class ContractDocuments extends Component {
             </FormGroup>
           </Col>
 
-          {this.state.grants.map((grant, i) => (
+          {this.state.data.grants.map((grant, i) => (
             <Row form key={i}>
               <Col md={4}>
                 <FormGroup>
@@ -130,7 +136,8 @@ class ContractDocuments extends Component {
                   />
                   {/* <small>
                     <span className="text-danger">
-                      {this.state.errors[i] && this.state.errors[i].name}
+                      {this.state.data.errors[i + 1] &&
+                        this.state.data.errors[i + 1].name}
                     </span>
                   </small> */}
                 </FormGroup>
@@ -171,7 +178,7 @@ class ContractDocuments extends Component {
             </Row>
           ))}
         </Row>
-        <Button outline color="primary" size="sm" onClick={this.handleClick}>
+        <Button outline color="primary" size="sm" onClick={this.handleAddClick}>
           <i className="fas fa-plus "> Add more grant fields</i>
         </Button>
       </div>
