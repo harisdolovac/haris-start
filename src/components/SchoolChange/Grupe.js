@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { Input, Col, Row, Button, FormGroup, Label } from "reactstrap";
 
 class Grupe extends Component {
-  state = {
-    groups: [],
-    errors: []
-  };
+  state = {};
 
   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
-  componentWillReceiveProps(props) {
-    console.log("cwrp", props);
+  componentWillReceiveProps({ data, errors }) {
+    this.setState({ data, errors });
+  }
+  componentWillMount() {
+    const { data } = this.props;
+    this.setState({ data });
+    //console.log("cdm", data);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -36,8 +38,9 @@ class Grupe extends Component {
     this.props.onDataChange("groups", groups);
   };
 
-  handleClick = e => {
-    let groups = this.state.groups;
+  handleAddClick = e => {
+    e.preventDefault();
+    let groups = this.state.data.groups;
     groups.push({
       name: "",
       group_type: "",
@@ -45,17 +48,16 @@ class Grupe extends Component {
       years_from: "",
       years_to: ""
     });
+    const data = this.state.data;
 
-    this.setState({
-      groups
-    });
-    this.props.onDataChange("groups", groups);
+    data["groups"] = groups;
+    this.setState({ groups });
+
+    // this.props.onDataChange("groups", groups);
   };
 
   render() {
-    console.log(this.state, "grupe");
-
-    // console.log(this.state.errors);
+    // console.log(this.state.errors, "grupe");
 
     return (
       <div style={{ paddingTop: "30px" }}>
@@ -87,7 +89,7 @@ class Grupe extends Component {
           </Col>
         </Row>
 
-        {this.state.groups.map((item, i) => (
+        {this.state.data.groups.map((item, i) => (
           <Row key={i}>
             <Col md={3}>
               <FormGroup>
@@ -221,7 +223,7 @@ class Grupe extends Component {
                 outline
                 color="primary"
                 size="sm"
-                onClick={this.handleClick}
+                onClick={this.handleAddClick}
               >
                 <i className="fas fa-plus "> Add more grant fields</i>
               </Button>

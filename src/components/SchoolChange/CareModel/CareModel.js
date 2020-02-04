@@ -3,7 +3,6 @@ import { Button, FormGroup, Input, Row, Col } from "reactstrap";
 import YearlyFees from "./YearlyFees";
 import MonthlyFees from "./MonthlyFees";
 import MonthlyDiscounts from "./MonthlyDiscounts";
-
 import Days from "./Days";
 
 class CareModel extends Component {
@@ -88,7 +87,7 @@ class CareModel extends Component {
   };
 
   render() {
-    //console.log("ovaj state je:,", this.state);
+    console.log("ovaj state je:,", this.state.services);
 
     return (
       <div>

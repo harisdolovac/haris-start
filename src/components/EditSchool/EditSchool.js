@@ -99,7 +99,7 @@ class School extends Component {
   }
 
   render() {
-    //console.log("glavni data", this.state);
+    // console.log("glavni data", this.state);
 
     const { data } = this.state;
 
@@ -221,7 +221,7 @@ class School extends Component {
               <TabPane tabId="3">
                 <Grupe
                   onDataChange={this.onDataChange}
-                  errors={this.state.errors.groups}
+                  errors={this.state.errors}
                   data={this.state.data}
                 />
               </TabPane>
@@ -229,7 +229,7 @@ class School extends Component {
               <TabPane tabId="4">
                 <CareModel
                   onDataChange={this.onDataChange}
-                  errors={this.state.errors.groups}
+                  errors={this.state.errors}
                   data={this.state.data}
                 />
               </TabPane>

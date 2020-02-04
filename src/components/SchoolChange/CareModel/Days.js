@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "reactstrap";
+import moment from "moment";
 
 class Days extends Component {
   state = {
@@ -54,6 +55,11 @@ class Days extends Component {
   };
 
   render() {
+    console.log("daysss", this.state);
+    console.log("ovo je u day dole day.time_from");
+
+    console.log("samo dani koji mi trebaju", this.state.days);
+
     return (
       <div>
         <Table bordered style={{ borderCollapse: "collapse" }}>
@@ -73,40 +79,47 @@ class Days extends Component {
               <th>Week</th>
             </tr>
           </thead>
+
           <tbody>
-            {this.state.days.map((day, i) => (
-              <tr key={day + i}>
-                <td>{this.getWeekDayName(day.week_day)}</td>
+            {this.state.days.map((day, i) => {
+              const a = moment([day.time_from]); //now
+              const b = moment([day.time_to]);
+              const c = a.diff(b, "minutes");
 
-                <td>
-                  <input
-                    style={{ width: "60%" }}
-                    type="text"
-                    name="time_from"
-                    value={day.time_from}
-                    onChange={e => this.handleChange(e, i)}
-                  />
-                </td>
+              return (
+                <tr key={day + i}>
+                  <td>{this.getWeekDayName(day.week_day)}</td>
 
-                <td>
-                  <input
-                    style={{ width: "60%" }}
-                    type="text"
-                    name="time_to"
-                    value={day.time_to}
-                    onChange={e => this.handleChange(e, i)}
-                  />
-                </td>
-                <td>
-                  <span></span>
-                </td>
-                {i === 0 && (
-                  <td rowSpan={7}>
-                    <span></span>
+                  <td>
+                    <input
+                      style={{ width: "60%" }}
+                      type="text"
+                      name="time_from"
+                      value={day.time_from}
+                      onChange={e => this.handleChange(e, i)}
+                    />
                   </td>
-                )}
-              </tr>
-            ))}
+
+                  <td>
+                    <input
+                      style={{ width: "60%" }}
+                      type="text"
+                      name="time_to"
+                      value={day.time_to}
+                      onChange={e => this.handleChange(e, i)}
+                    />
+                  </td>
+                  <td>
+                    <span>{c}</span>
+                  </td>
+                  {i === 0 && (
+                    <td rowSpan={7}>
+                      <span></span>
+                    </td>
+                  )}
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </div>
