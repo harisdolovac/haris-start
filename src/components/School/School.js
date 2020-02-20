@@ -86,7 +86,7 @@ class School extends Component {
   };
 
   render() {
-    // console.log("glavni state:", this.state);
+    console.log("glavni state:", this.state);
 
     return (
       <Jumbotron>

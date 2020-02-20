@@ -95,11 +95,12 @@ class School extends Component {
       this.setState({
         data: res.data
       });
+      console.log(res.data);
     });
   }
 
   render() {
-    // console.log("glavni data", this.state);
+    console.log("glavni data", this.state);
 
     const { data } = this.state;
 

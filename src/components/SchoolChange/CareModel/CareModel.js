@@ -10,27 +10,40 @@ class CareModel extends Component {
     services: []
   };
 
+  componentWillReceiveProps({ data, errors }) {
+    this.setState({ data, errors });
+    //   console.log("cdm1", data);
+  }
+
+  componentWillMount() {
+    const { data } = this.props;
+    this.setState({ data });
+    //console.log("cdm", data);
+  }
+
   handleAddClick = e => {
     e.preventDefault();
-    this.setState({
-      services: [
-        ...this.state.services,
-        {
-          days: [
-            { week_day: 1, time_from: "00:00", time_to: "00:00" },
-            { week_day: 2, time_from: "00:00", time_to: "00:00" },
-            { week_day: 3, time_from: "00:00", time_to: "00:00" },
-            { week_day: 4, time_from: "00:00", time_to: "00:00" },
-            { week_day: 5, time_from: "00:00", time_to: "00:00" },
-            { week_day: 6, time_from: "00:00", time_to: "00:00" },
-            { week_day: 7, time_from: "00:00", time_to: "00:00" }
-          ],
-          monthly_fees: [{ account: "", price: "" }],
-          yearly_fees: [{ account: "", price: "" }],
-          monthly_discounts: [{ account: "", price: "" }]
-        }
-      ]
+    console.log("i was clicked");
+
+    const services = this.state.data.services;
+    services.push({
+      days: [
+        { week_day: 1, time_from: "00:00", time_to: "00:00" },
+        { week_day: 2, time_from: "00:00", time_to: "00:00" },
+        { week_day: 3, time_from: "00:00", time_to: "00:00" },
+        { week_day: 4, time_from: "00:00", time_to: "00:00" },
+        { week_day: 5, time_from: "00:00", time_to: "00:00" },
+        { week_day: 6, time_from: "00:00", time_to: "00:00" },
+        { week_day: 7, time_from: "00:00", time_to: "00:00" }
+      ],
+      monthly_fees: [{ account: "", price: "" }],
+      yearly_fees: [{ account: "", price: "" }],
+      monthly_discounts: [{ account: "", price: "" }]
     });
+    const data = this.state.data;
+
+    data["services"] = services;
+    this.setState({ services });
   };
   //ovo nista ne puni mora da se napravi glavni state
 
@@ -87,7 +100,7 @@ class CareModel extends Component {
   };
 
   render() {
-    console.log("ovaj state je:,", this.state.services);
+    console.log("ovaj state je:,", this.state);
 
     return (
       <div>

@@ -55,11 +55,6 @@ class Days extends Component {
   };
 
   render() {
-    console.log("daysss", this.state);
-    console.log("ovo je u day dole day.time_from");
-
-    console.log("samo dani koji mi trebaju", this.state.days);
-
     return (
       <div>
         <Table bordered style={{ borderCollapse: "collapse" }}>
@@ -84,7 +79,8 @@ class Days extends Component {
             {this.state.days.map((day, i) => {
               const a = moment([day.time_from]); //now
               const b = moment([day.time_to]);
-              const c = a.diff(b, "minutes");
+
+              const c = a.diff(b, "hours");
 
               return (
                 <tr key={day + i}>
@@ -110,7 +106,7 @@ class Days extends Component {
                     />
                   </td>
                   <td>
-                    <span>{c}</span>
+                    <span>{Math.abs(c / 365 / 24).toFixed(0)}</span>
                   </td>
                   {i === 0 && (
                     <td rowSpan={7}>

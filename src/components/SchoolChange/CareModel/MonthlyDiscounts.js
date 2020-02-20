@@ -112,8 +112,9 @@ class Monthly extends Component {
                       <option value="6532">Hort</option>
                     </Input>
                   </td>
+
                   <td>
-                    <span>{month.name}</span>
+                    <span>{month.value}</span>
                   </td>
                   <td>
                     <InputGroup>

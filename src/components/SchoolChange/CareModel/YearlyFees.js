@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 
 class YearlyFees extends Component {
-  state = { yearly_fees: this.props.yearly_fees };
+  state = { yearly_fees: [] };
 
   handleChange = (e, i) => {
     const newValues = this.state.yearly_fees;
